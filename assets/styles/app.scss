@@ -1,2 +1,8 @@
-//start coding by removing this file and adding yours ;)
-@import "wcs";
+//color scheme from convertit v1.0.
+// --backgroundColor: #DFCEBA;
+// --primaryColor: #AF5454;
+// --secondaryColor: #78B1D1;
+$primary: #dfceba;
+$secondary: #af5454;
+$tertiary: #78b1d1;
+@import "~bootstrap/scss/bootstrap";
