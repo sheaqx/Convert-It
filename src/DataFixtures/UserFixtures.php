@@ -13,7 +13,7 @@ class UserFixtures extends Fixture
     public const PREFIX = 'user_';
     public function load(ObjectManager $manager): void
     {
-        $faker = Factory::create('FR_fr');
+        $faker = Factory::create('fr_FR');
 
         for ($i = 1; $i <= self::USER_COUNT; $i++) {
             $user = new User();
