@@ -1,25 +1,78 @@
-# Commandes utlies
+# Commandes utiles
 
-## Passages des tests de code-quality avant commit / push
+###### **PHP/SYMFONY/DOCTRINE**
 
--   `php ./vendor/bin/grumphp run`
+---
 
-## Preparation de la Bdd
+## Passage des tests de code-quality avant commit / push
 
--   `composer prepare-db`
+### Dans un projet comportant la suite grumphp
 
-## lancement de symfony http (no-tls)
+- Executer la commande :
 
--   `symfony server:start --no-tls`
+```
+php ./vendor/bin/grumphp run
+```
 
-## Lancement de webpack sans overlay warnings Bootstrap
+---
 
--   `yarn dev-erver --no-client-overay-warnings`
+## **Preparation de la Bdd** (Symfony/Doctrine)
 
-## Lancement des mises à jour des dépendences composer
+### Ajouter à composer.json -> scripts :
 
--   `composer install`
+```
+,
+    "prepare-db": [
+    "php bin/console d:d:d --if-exists --force",
+    "php bin/console d:d:c",
+    "php bin/console d:m:m -n",
+    "php bin/console d:f:l --append"
+```
 
-## Lancement des mises à jour des dépendences yarn
+- Executer la commande :
 
--   `yarn`
+```
+composer prepare-db
+```
+
+---
+
+## **Lancement de symfony http (no-tls)**
+
+- Executer la commande :
+
+```
+symfony server:start --no-tls
+```
+
+---
+
+## **Lancement de webpack sans overlay warnings Bootstrap**
+
+- Executer la commande :
+
+```
+yarn dev-server --no-client-overay-warnings
+```
+
+---
+
+## **Lancement des mises à jour des dépendences composer**
+
+- Executer la commande :
+
+```
+composer install
+```
+
+---
+
+## **Lancement des mises à jour des dépendences yarn**
+
+- Executer la commande :
+
+```
+yarn
+```
+
+---
