@@ -3,8 +3,12 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ContactType extends AbstractType
 {
@@ -12,8 +16,16 @@ class ContactType extends AbstractType
     {
         $builder
             ->add('pseudo', TextType::class)
-            ->add('email', TextType::class)
+            ->add('email', EmailType::class)
             ->add('subject', TextType::class)
-            ->add('message', TextType::class);
+            ->add('message', TextareaType::class)
+            ->add('send', SubmitType::class);
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            // Configure your form options here
+        ]);
     }
 }
