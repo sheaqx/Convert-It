@@ -1,0 +1,15 @@
+<div class="userpic">
+	<ul class="">
+		{% for picture in pictures %}
+			<li>
+				<form method="POST">
+					<div class="img-container">
+						<img src="{{picturesPath ?? ""}}{{picture.name ?? ""}}" alt="{{picture.tag ?? ""}}">
+					</div>
+					<input type="hidden" value="{{picture.id}}" name="pictureID">
+					<button type="submit" class="">Supprimer</button>
+				</form>
+			</li>
+		{% endfor %}
+	</ul>
+</div>

@@ -13,6 +13,7 @@ class UserController extends AbstractController
     {
         return $this->render('pages/user/index.html.twig', [
             'controller_name' => 'UserController',
+            'pictures' => []
         ]);
     }
 }

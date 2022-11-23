@@ -1,0 +1,30 @@
+<div class="">
+	<div class="">
+		<form method="POST" enctype="multipart/form-data">
+			<fieldset class="">
+				<div class="">
+					<div>
+						<label for="profile_pic">Image de profile</label>
+					</div>
+					<div class="">
+						<div>
+							<input type="file" aria-label="Custom controls" name="profile_pic">
+							<input class="" type="text" placeholder="Select file" aria-label="Custom controls" disabled>
+							<div class="">
+								{{errors.noFile ?? ""}}
+							</div>
+							<div class="">
+								{{errors.incorrectSize ?? ""}}
+							</div>
+							<div class="">
+								{{errors.filetype ?? ""}}
+							</div>
+						</div>
+					</div>
+				</div>
+				<button type="submit" class="">Modifier</button>
+			</fieldset>
+		</form>
+		<a href="/user">Back</a>
+	</div>
+</div>
