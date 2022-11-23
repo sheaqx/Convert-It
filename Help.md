@@ -52,7 +52,7 @@ symfony server:start --no-tls
 - Executer la commande :
 
 ```
-yarn dev-server --no-client-overay-warnings
+yarn dev-server --no-client-overlay-warnings
 ```
 
 ---

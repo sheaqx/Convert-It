@@ -6,13 +6,14 @@
 {% endblock %}
 
 {% block body %}
-	<div class="">
+	<div class="container">
 
 		<div
-			class="" id="contact_form_image">
+			class="d-flex" id="contact_form_image">
 			{#Pixabay Image license. Free for commercial use#}
 			<img src="{{asset('build/images/contactUsPics/call-3613071_1280_ocre.png')}}" width="400" alt="Contact Convertit filling the form" class="">
+			<div>{% include "pages/contact/_form.html.twig" %}</div>
 		</div>
-		{# add contact form #}
+
 	</div>
 {% endblock %}
