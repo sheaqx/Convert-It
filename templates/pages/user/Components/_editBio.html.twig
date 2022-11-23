@@ -1,0 +1,21 @@
+<div class="">
+	<div class="">
+		<form method="POST">
+			<fieldset class="">
+				<div class="">
+					<div>
+						<label for="bio">Biographie</label>
+					</div>
+					<div class="">
+						<textarea id="bio" class="" type="textarea" name="bio" cols="50" rows="5" placeholder="">{{loggedUser.biography ?? ""}}</textarea>
+					</div>
+					<div class="">
+						{{errors.emptybio ?? ""}}
+					</div>
+				</div>
+				<button type="submit" class="">Modifier</button>
+			</fieldset>
+		</form>
+		<a href="/user">Back</a>
+	</div>
+</div>

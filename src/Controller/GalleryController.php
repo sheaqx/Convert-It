@@ -12,7 +12,7 @@ class GalleryController extends AbstractController
     public function index(): Response
     {
         return $this->render('pages/gallery/index.html.twig', [
-            'controller_name' => 'GalleryController',
+            'controller_name' => 'GalleryController', 'images' => []
         ]);
     }
 }

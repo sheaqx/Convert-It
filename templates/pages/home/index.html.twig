@@ -1,12 +1,47 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}
-	{{parent() }}
-	Home
-{% endblock %}
-
 {% block body %}
 	<div class="tex">
-		<h1>Welcome to Convertit!</h1>
+		<h1>Welcome to Convertit!
+			{% if loggedUser %}
+				<img src="{{profilePicturePath ?? ''}}{{loggedUser.profile_pic ?? ''}}" alt="{{loggedUser.profile_pic ?? ''}}" width='60' height='60' class="">
+				{{loggedUser.pseudo ?? ''}}
+			{% else %}
+				<div>
+					<strong>Veuillez vous connecter ou vous incrire pour utiliser l'application</strong>
+				</div>
+			{% endif %}
+		</h1>
+		<h2>Convert and share your images</h2>
+		<p>Here you can convert your images to webp, png or jpg and share them freely with the comunity
+		</p>
+		<h1>convertir votre image</h1>
 	</div>
+	<div>
+		<h1>form</h1>
+		{# add upload form #}
+	</div>
+	<section class="bloc how">
+		<h3>Comment Convertir</h3>
+		<ul class="">
+			<li>
+				<div class="">
+					<p class="">1</p>
+					<div>Connectez vous pour convertir vos images preferées</div>
+				</div>
+			</li>
+			<li>
+				<div class="">
+					<p class="">2</p>
+					<div>Remplissez tout les champs necessaires</div>
+				</div>
+			</li>
+			<li>
+				<div class="">
+					<p class="">3</p>
+					<div>Cliquez sur Convert et consultez vos images</div>
+				</div>
+			</li>
+		</ul>
+	</section>
 {% endblock %}
