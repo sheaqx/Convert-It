@@ -8,10 +8,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class GalleryController extends AbstractController
 {
-    #[Route('/gallery', name: 'app_gallery')]
+    #[Route('/gallery', name: 'gallery_index')]
     public function index(): Response
     {
-        return $this->render('gallery/index.html.twig', [
+        return $this->render('pages/gallery/index.html.twig', [
             'controller_name' => 'GalleryController',
         ]);
     }
