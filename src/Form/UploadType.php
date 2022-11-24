@@ -3,9 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Picture;
-//use App\Entity\User;
-// use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-//use Symfony\Component\Form\ChoiceList\Factory\Cache\ChoiceLabel;
+use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\ChoiceList\Factory\Cache\ChoiceLabel;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -23,7 +23,9 @@ class UploadType extends AbstractType
                 'label' => 'Images',
                 'constraints' => [
                     new File([
+                        //max size of 2mb
                         'maxSize' => '2000k',
+                        //allowed images
                         'mimeTypes' => [
                             'image/png',
                             'image/jpeg',
@@ -35,12 +37,13 @@ class UploadType extends AbstractType
             ])
             ->add('tag', TextType::class)
             ->add('description', TextType::class)
-            ->add('Convert', SubmitType::class);
+            //adding User dropdown until login is finished to add into user_id
+            ->add('user', EntityType::class, [
+                'class' => User::class,
+                "choice_label" => 'pseudo'
+            ])
+            ->add('upload', SubmitType::class, ['label' => 'Convert It !']);
         // ->add('slug')
-        // ->add('user', EntityType::class, [
-        //     'class' => User::class,
-        //     "choice_label" => 'pseudo'
-        // ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
