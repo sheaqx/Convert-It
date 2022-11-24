@@ -2,7 +2,7 @@
 
 {% block body %}
 	<div class="tex">
-		<h1>Bienvenue sur convertIt!
+		<h1>Bienvenue sur ConvertIt!
 			{% if loggedUser %}
 				<img src="{{profilePicturePath ?? ''}}{{loggedUser.profile_pic ?? ''}}" alt="{{loggedUser.profile_pic ?? ''}}" width='60' height='60' class="">
 				{{loggedUser.pseudo ?? ''}}
