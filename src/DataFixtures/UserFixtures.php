@@ -11,6 +11,8 @@ class UserFixtures extends Fixture
 {
     public const USER_COUNT = 20;
     public const PREFIX = 'user_';
+
+
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create('fr_FR');
@@ -20,11 +22,11 @@ class UserFixtures extends Fixture
 
             $user->setEmail($faker->email())
                 ->setPseudo($faker->word())
-                ->setPassword('C0nvertit!')
                 ->setBio($faker->paragraph(2, true))
                 ->setProfilePicture('https://source.unsplash.com/random/80x80')
-                ->setRole('user')
-                ->setActive(true);
+                ->setRoles(['ROLE_USER'])
+                ->setActive(true)
+                ->setPlainPassword('C0nvertIt!');
             $manager->persist($user);
             $this->addReference(self::PREFIX . $i, $user);
         }
@@ -32,11 +34,11 @@ class UserFixtures extends Fixture
 
         $user->setEmail($faker->email())
             ->setPseudo('admin')
-            ->setPassword('C0nvertit!')
             ->setBio($faker->paragraph(2, true))
             ->setProfilePicture('https://source.unsplash.com/random/80x80')
-            ->setRole('admin')
-            ->setActive(true);
+            ->setRoles(['ROLE_USER', 'ROLE_ADMIN'])
+            ->setActive(true)
+            ->setPlainPassword('C0nvertIt!');
         $manager->persist($user);
         $this->addReference(self::PREFIX .  (self::USER_COUNT + 1), $user);
 
