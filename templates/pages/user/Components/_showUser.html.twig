@@ -1,11 +1,11 @@
 <h1>Profil de
-	{{loggedUser.pseudo ?? ""}}</h1>
+	{{app.user.pseudo ?? ""}}</h1>
 <div>
 	<div class="img-container">
-		<img src="{{profilePicturePath ?? ""}}{{loggedUser.profile_pic ?? ""}}" alt="avatar de {{loggedUser.pseudo ?? " "}}">
+		<img src="{{ app.user.profilePicture ?? "" }}" alt="avatar de {{ app.user.pseudo ?? ""}}">
 	</div>
 	<div>
 		<h2>Biographie :</h2>
-		<div>{{loggedUser.biography ?? ""}}</div>
+		<div>{{app.user.biography ?? ""}}</div>
 	</div>
 </div>

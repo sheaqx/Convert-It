@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class RegisterController extends AbstractController
 {
-    #[Route('/register', name: 'register_index')]
+    #[Route('/reg', name: 'reg_index')]
     public function index(): Response
     {
         return $this->render('pages/register/index.html.twig', [

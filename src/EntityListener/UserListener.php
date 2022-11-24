@@ -29,6 +29,6 @@ class UserListener
                 $user->getPlainPassword()
             )
         );
-        $user->eraseCredentials();
+        // $user->eraseCredentials();
     }
 }
