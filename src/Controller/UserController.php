@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\SuspendAccount;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,17 +23,19 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/suspend', name: 'suspend')]
-    public function suspend(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $user = new User();
+    #[Route('/suspend/{id}', name: 'suspend')]
+    public function suspend(
+        int $id,
+        UserRepository $userRepository,
+        Request $request,
+        EntityManagerInterface $entityManager
+    ): Response {
+
+
+        $user = $userRepository->find($id);
         $form = $this->createForm(SuspendAccount::class, $user);
         $form->handleRequest($request);
-
-        dump($form);
-        dump($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
             $user->setActive(false);
             $entityManager->persist($user);
             $entityManager->flush();
