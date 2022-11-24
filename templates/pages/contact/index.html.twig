@@ -6,12 +6,10 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container">
-		<div
-			class="d-flex" id="contact_form_image">
-			{#Pixabay Image license. Free for commercial use#}
-			<img src="{{asset('build/images/contactUsPics/call-3613071_1280_ocre.png')}}" width="400" alt="Contact Convertit filling the form" class="">
-			<div>{% include "pages/contact/_form.html.twig" %}</div>
+	<div class="container y-5">
+		<div class="d-flex justify-content-center w-80 align-items-center m-3" id="contact_form_image">
+			<img class="w-50" src="{{asset('build/images/contactUsPics/call-3613071_1280_ocre.png')}}" width="400" alt="Contact Convertit filling the form" class="">
+			<div class="w-50">{% include "pages/contact/_form.html.twig" %}</div>
 		</div>
 	</div>
 {% endblock %}

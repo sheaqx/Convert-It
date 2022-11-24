@@ -21,7 +21,7 @@ class UserFixtures extends Fixture
             $user = new User();
 
             $user->setEmail($faker->email())
-                ->setPseudo($faker->word())
+                ->setPseudo($faker->firstName())
                 ->setBio($faker->paragraph(2, true))
                 ->setProfilePicture('https://source.unsplash.com/random/80x80')
                 ->setRoles(['ROLE_USER'])
