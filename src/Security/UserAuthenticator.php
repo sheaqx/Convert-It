@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+use Exception;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -42,13 +43,14 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
+        $targetPath = $this->getTargetPath($request->getSession(), $firewallName);
+        if (!is_null($targetPath)) {
             return new RedirectResponse($targetPath);
         }
 
         // For example:
         return new RedirectResponse($this->urlGenerator->generate('home_index'));
-        throw new \Exception('TODO: provide a valid redirect inside ' . __FILE__);
+        throw new Exception('TODO: provide a valid redirect inside ' . __FILE__);
     }
 
     protected function getLoginUrl(Request $request): string
