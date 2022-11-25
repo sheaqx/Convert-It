@@ -27,14 +27,13 @@ class UserController extends AbstractController
         Request $request,
         TokenStorageInterface $tokenStorage,
     ): Response {
+        /** @var User */
         $user = $this->getUser();
         $form = $this->createForm(SuspendAccount::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $userToRemove = new User();
-            $userToRemove = $userRepository->find($user);
-            $userRepository->remove($userToRemove, true);
+            $userRepository->remove($user, true);
             $request->getSession()->invalidate();
             $tokenStorage->setToken(null);
             return $this->redirectToRoute('home_index');
