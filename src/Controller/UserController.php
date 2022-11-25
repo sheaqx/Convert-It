@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\SuspendAccount;
+use App\Form\SuspendAccountType;
 use App\Form\UserEditBioFormType;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,7 +29,7 @@ class UserController extends AbstractController
     ): Response {
         /** @var User */
         $user = $this->getUser();
-        $form = $this->createForm(SuspendAccount::class, $user);
+        $form = $this->createForm(SuspendAccountType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
