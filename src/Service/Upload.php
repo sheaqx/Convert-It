@@ -7,9 +7,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class Upload
 {
-    private string $uploadDestination;
-
-    public function __construct(string $uploadDestination, private SluggerInterface $slugger)
+    public function __construct(private string $uploadDestination, private SluggerInterface $slugger)
     {
         $this->uploadDestination = $uploadDestination;
         $this->slugger = $slugger;
