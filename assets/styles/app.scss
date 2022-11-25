@@ -8,3 +8,11 @@ $tertiary: #78b1d1;
 $fourth: #8EBEE9;
 $fifth: #407C96;
 @import "~bootstrap/scss/bootstrap";
+.img-container{
+    width: 400px;
+    height: auto;
+}
+.profile-picture{
+    width: 60px;
+    height: auto;
+}
