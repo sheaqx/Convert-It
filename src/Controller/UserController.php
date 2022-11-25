@@ -46,10 +46,17 @@ class UserController extends AbstractController
     #[Route('/editBio', name: 'edit_bio')]
     public function editBio(
         Request $request,
+        UserRepository $userRepository,
     ): Response {
+        /** @var User */
         $user = $this->getUser();
         $form = $this->createForm(UserEditBioFormType::class, $user);
         $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user->setBio($form->get('bio')->getData());
+            $userRepository->save($user, true);
+            return $this->redirectToRoute('user_index');
+        }
 
         return $this->render('pages/user/editBio.html.twig', [
             'form' => $form->createView()
