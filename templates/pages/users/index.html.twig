@@ -14,7 +14,7 @@
 						{{user.pseudo ?? ""}}
 					</h3>
 					<div>
-						<a href="/usersPics/show?id={{user.id ?? " "}}">{{ user.pseudo ?? ""}}</a>
+						<a class="link-secondary" href="/usersPics/show?id={{user.id ?? " "}}">{{ user.pseudo ?? ""}}</a>
 					</div>
 					<ul class="">
 						{% for picture in user.pictures %}
