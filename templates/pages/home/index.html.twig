@@ -3,14 +3,17 @@
 {% block body %}
 	<div class="tex">
 		<h1>Bienvenue sur ConvertIt!
-			{% if loggedUser %}
-				<img src="{{profilePicturePath ?? ''}}{{loggedUser.profile_pic ?? ''}}" alt="{{loggedUser.profile_pic ?? ''}}" width='60' height='60' class="">
-				{{loggedUser.pseudo ?? ''}}
+			{% if app.user %}
+				<img src="{{profilePicturePath ?? ''}}{{app.user.profile_pic ?? ''}}" alt="{{app.user.profile_pic ?? ''}}" width='60' height='60' class="">
+				{{app.user.pseudo ?? ''}}
 			{% else %}
 				<div>
 					<strong>Veuillez vous connecter ou vous incrire pour utiliser l'application</strong>
 				</div>
 			{% endif %}
+			<pre>
+                {{ dump(app.user) }}
+            </pre>
 		</h1>
 		<h2>Convertissez et partagez vos images</h2>
 		<p>Ici, vous pourrez convertir vos images en png, jpg ou webp et les partager librement avec la communauté</p>

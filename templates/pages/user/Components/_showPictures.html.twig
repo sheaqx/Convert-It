@@ -1,15 +1,21 @@
-<div class="userpic">
-	<ul class="">
+<div class="user-pictures">
+	<ul class="container">
 		{% for picture in pictures %}
-			<li>
+
+			<li class="card">
 				<form method="POST">
-					<div class="img-container">
-						<img src="{{picturesPath ?? ""}}{{picture.name ?? ""}}" alt="{{picture.tag ?? ""}}">
+					<div class="m-4 d-flex">
+						<h6>{{picture.tag}}</h6>
+						<div class="img-container p-4">
+							<img class="img-fluid rounded mx-auto d-block" src="{{ picture.name }}" alt="{{picture.tag}}"/>
+						</div>
+						<span>{{picture.description}}</span>
 					</div>
 					<input type="hidden" value="{{picture.id}}" name="pictureID">
-					<button type="submit" class="">Supprimer</button>
+					<button type="submit" class="btn btn-secondary">Supprimer</button>
 				</form>
 			</li>
+
 		{% endfor %}
 	</ul>
 </div>

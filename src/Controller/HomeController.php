@@ -33,5 +33,6 @@ class HomeController extends AbstractController
         }
 
         return $this->renderForm('pages/home/index.html.twig', ['loggedUser' => [""], '', 'form' => $uploadForm]);
+
     }
 }

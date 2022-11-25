@@ -19,6 +19,13 @@ services:
             - "../src/DependencyInjection/"
             - "../src/Entity/"
             - "../src/Kernel.php"
+    App\Service\ContactService:
+        arguments:
+            $mailerFrom: "%env(resolve:MAILER_FROM_ADDRESS)%"
+
+    App\EntityListener\:
+        resource: '../src/EntityListener/'
+        tags: ['doctrine.orm.entity_listener']
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

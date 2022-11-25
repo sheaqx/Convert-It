@@ -1,8 +1,9 @@
+{% set pictures = app.user.pictures %}
 {% extends "base.html.twig" %}
 {% block title %}
 	{{parent()}}
 	- Profile de
-	{{loggedUser.pseudo ?? ""}}
+	{{app.user.pseudo}}
 {% endblock %}
 
 {% block body %}
@@ -11,15 +12,15 @@
 		<div>
 			<div>
 				<div>
-					<a href="user/editBio">Edit Bio</a>
+					<a class="link-secondary" href="user/editBio">Edit Bio</class="link-secondary">
 				</div>
 				<div>
-					<a href="user/editProfilePicture">Edit profile picture</a>
+					<a class="link-secondary" href="user/editProfilePicture">Edit profile picture</a>
 				</div>
 			</div>
 			<div>
 				<div>
-					<a href="user/suspend">Suspend</a>
+					<a class="link-secondary" href="user/suspend">Suspend</a>
 				</div>
 			</div>
 		</div>

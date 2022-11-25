@@ -7,10 +7,7 @@
 						<label for="bio">Biographie</label>
 					</div>
 					<div class="">
-						<textarea id="bio" class="" type="textarea" name="bio" cols="50" rows="5" placeholder="">{{loggedUser.biography ?? ""}}</textarea>
-					</div>
-					<div class="">
-						{{errors.emptybio ?? ""}}
+						<textarea id="bio" class="" type="textarea" name="bio" cols="50" rows="5" placeholder="">{{app.user.bio ?? ""}}</textarea>
 					</div>
 				</div>
 				<button type="submit" class="">Modifier</button>

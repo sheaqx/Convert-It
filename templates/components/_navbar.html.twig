@@ -21,13 +21,25 @@
 				<li class="nav-item">
 					<a class="nav-link" href="{{path('contact_index')}}">Contact</a>
 				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Connect</a>
-					<div class="dropdown-menu" aria-labelledby="dropdownId">
-						<a class="dropdown-item" href="{{path('register_index')}}">Register</a>
-						<a class="dropdown-item" href="{{path('login_index')}}">Login</a>
-					</div>
-				</li>
+				{% if is_granted('ROLE_USER') %}
+					<img src="{{app.user.profilePicture}}" alt="" width="40">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{app.user.pseudo}}</a>
+						<div class="dropdown-menu" aria-labelledby="dropdownId">
+							<a class="dropdown-item" href="{{path('user_index')}}">Profile</a>
+							<a class="dropdown-item" href="{{path('app_logout')}}">Logout</a>
+						</div>
+					</li>
+				{% else %}
+
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Connect</a>
+						<div class="dropdown-menu" aria-labelledby="dropdownId">
+							<a class="dropdown-item" href="{{path('app_register')}}">Register</a>
+							<a class="dropdown-item" href="{{path('app_login')}}">Login</a>
+						</div>
+					</li>
+				{% endif %}
 			</ul>
 		</div>
 	</div>
