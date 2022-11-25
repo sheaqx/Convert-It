@@ -21,6 +21,7 @@ class UploadType extends AbstractType
         $builder
             ->add('name', FileType::class, [
                 'label' => 'Images',
+                'required' => true,
                 'constraints' => [
                     new File([
                         //max size of 2mb
@@ -35,11 +36,12 @@ class UploadType extends AbstractType
                     ])
                 ],
             ])
-            ->add('tag', TextType::class)
-            ->add('description', TextType::class)
+            ->add('tag', TextType::class, ['required' => true,])
+            ->add('description', TextType::class, ['required' => true,])
             //adding User dropdown until login is finished to add into user_id
             ->add('user', EntityType::class, [
                 'class' => User::class,
+                'required' => true,
                 "choice_label" => 'pseudo'
             ])
             ->add('upload', SubmitType::class, ['label' => 'Convert It !']);
