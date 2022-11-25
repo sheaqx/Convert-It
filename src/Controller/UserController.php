@@ -23,19 +23,19 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/suspend/{id}', name: 'suspend')]
+    #[Route('/suspend', name: 'suspend')]
     public function suspend(
-        int $id,
         UserRepository $userRepository,
         Request $request,
         EntityManagerInterface $entityManager
     ): Response {
 
 
-        $user = $userRepository->find($id);
+        $user = $this->getUser();
         $form = $this->createForm(SuspendAccount::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $user = $userRepository->find($user);
             $user->setActive(false);
             $entityManager->persist($user);
             $entityManager->flush();
