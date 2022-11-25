@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\SuspendAccount;
+use App\Form\UserEditBioFormType;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,10 +18,7 @@ class UserController extends AbstractController
     #[Route('', name: 'index')]
     public function index(): Response
     {
-        return $this->render('pages/user/index.html.twig', [
-            'controller_name' => 'UserController',
-            'pictures' => []
-        ]);
+        return $this->render('pages/user/index.html.twig');
     }
 
     #[Route('/suspend', name: 'suspend')]
@@ -43,6 +41,19 @@ class UserController extends AbstractController
         }
         return $this->render('pages/user/suspend.html.twig', [
             'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/editBio', name: 'edit_bio')]
+    public function editBio(
+        Request $request,
+    ): Response {
+        $user = $this->getUser();
+        $form = $this->createForm(UserEditBioFormType::class, $user);
+        $form->handleRequest($request);
+
+        return $this->render('pages/user/editBio.html.twig', [
+            'form' => $form->createView()
         ]);
     }
 }
