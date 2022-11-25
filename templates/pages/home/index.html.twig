@@ -2,7 +2,7 @@
 
 {% block body %}
 	<div class="tex">
-		<h1>Welcome to Convertit!
+		<h1>Bienvenue sur ConvertIt!
 			{% if app.user %}
 				<img src="{{profilePicturePath ?? ''}}{{app.user.profile_pic ?? ''}}" alt="{{app.user.profile_pic ?? ''}}" width='60' height='60' class="">
 				{{app.user.pseudo ?? ''}}
@@ -15,14 +15,12 @@
                 {{ dump(app.user) }}
             </pre>
 		</h1>
-		<h2>Convert and share your images</h2>
-		<p>Here you can convert your images to webp, png or jpg and share them freely with the comunity
-		</p>
-		<h1>convertir votre image</h1>
+		<h2>Convertissez et partagez vos images</h2>
+		<p>Ici, vous pourrez convertir vos images en png, jpg ou webp et les partager librement avec la communauté</p>
 	</div>
 	<div>
-		<h1>form</h1>
-		{# add upload form #}
+		<h1>convertir votre image</h1>
+		<div>{% include "pages/home/_form.html.twig" %}</div>
 	</div>
 	<section class="bloc how">
 		<h3>Comment Convertir</h3>
