@@ -31,8 +31,6 @@ class HomeController extends AbstractController
             $manager->persist($upload);
             $manager->flush();
         }
-
         return $this->renderForm('pages/home/index.html.twig', ['loggedUser' => [""], '', 'form' => $uploadForm]);
-
     }
 }
