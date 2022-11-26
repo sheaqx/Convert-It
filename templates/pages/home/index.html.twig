@@ -1,19 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<div class="w-60 text-center">
+	<div class="w-100 text-center">
 		<h1>Bienvenue sur ConvertIt!
 			{% if app.user %}
 				<img src="{{profilePicturePath ?? ''}}{{app.user.profile_pic ?? ''}}" alt="{{app.user.profile_pic ?? ''}}" width='60' height='60' class="">
 				{{app.user.pseudo ?? ''}}
 			{% else %}
 				<div>
-					<strong>Veuillez vous connecter ou vous incrire pour utiliser l'application</strong>
+					<h6>
+						<a class='link-secondary' href="{{path('app_login')}}">Veuillez vous connecter ou vous incrire pour utiliser l'application</a>
+					</h6>
 				</div>
 			{% endif %}
 		</h1>
-		<div class="d-flex justify-content-center text-start">
-			<section class="w-50 mx-4">
+		<div class="w-75 d-flex justify-content-center text-start mx-auto">
+			<section class="mx-4" style="min-width:18rem;">
 				<div class="tex">
 					<h2>Convertissez et partagez vos images</h2>
 					<p>Ici, vous pourrez convertir vos images en png, jpg ou webp et les partager librement avec la communauté</p>

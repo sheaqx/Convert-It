@@ -1,3 +1,7 @@
 {{ form_start(form) }}
-{{ form_widget(form) }}
+{{ form_row(form.pseudo) }}
+{{ form_row(form.email) }}
+{{ form_row(form.subject) }}
+{{ form_row(form.message,{'attr':{'class':'custom-text-area'}}) }}
+{{ form_row(form.send,{'attr':{'class':'btn btn-secondary'}}) }}
 {{ form_end(form) }}
