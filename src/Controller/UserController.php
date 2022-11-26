@@ -87,7 +87,7 @@ class UserController extends AbstractController
             $user->setProfilePicture($uploadDestination . $uploadFileName);
             $userRepository->save($user, true);
 
-            $uploadFile->deleteOldProfilePicure($oldProfilePicture);
+            $uploadFile->deleteOldPicture($oldProfilePicture);
             $this->addFlash('success', 'your profile picture has been updated.');
             return $this->redirectToRoute('user_index');
         }

@@ -25,6 +25,7 @@ class Upload
         );
         return $newFileName;
     }
+
     public function profilePictureUpload(UploadedFile $uploadedFile): string
     {
         $originaleFileName = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
@@ -49,7 +50,7 @@ class Upload
         return $this->uploadDestination;
     }
 
-    public function deleteOldProfilePicure(string $oldFile): void
+    public function deleteOldPicture(string $oldFile): void
     {
         $filelist = glob($this->getUploadDestination() . '*');
         foreach ($filelist as $file) {
