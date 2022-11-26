@@ -10,6 +10,7 @@ use App\Form\UserEditBioFormType;
 use App\Repository\PictureRepository;
 use App\Repository\UserRepository;
 use App\Service\Upload;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,6 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 #[Route('/user', name: 'user_')]
+#[IsGranted('ROLE_USER')]
 class UserController extends AbstractController
 {
     #[Route('', name: 'index')]
@@ -35,6 +37,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/suspend', name: 'suspend')]
+    #[IsGranted('ROLE_USER')]
     public function suspend(
         UserRepository $userRepository,
         Request $request,
@@ -57,6 +60,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/editBio', name: 'editBio')]
+    #[IsGranted('ROLE_USER')]
     public function editBio(
         Request $request,
         UserRepository $userRepository,
@@ -77,6 +81,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/editProfilePicture', name: 'editProfilePicture')]
+    #[IsGranted('ROLE_USER')]
     public function editProfilePictureAction(
         Request $request,
         Upload $upload,
