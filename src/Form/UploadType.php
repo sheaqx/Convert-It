@@ -44,7 +44,7 @@ class UploadType extends AbstractType
                 'required' => true,
                 "choice_label" => 'pseudo'
             ])
-            ->add('upload', SubmitType::class, ['label' => 'Convert It !']);
+            ->add('upload', SubmitType::class, ['label' => 'Convert It !', 'attr' => ['class' => 'btn btn-secondary']]);
         // ->add('slug')
     }
 

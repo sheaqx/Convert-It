@@ -9,7 +9,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 
-class SuspendAccount extends AbstractType
+class SuspendAccountType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

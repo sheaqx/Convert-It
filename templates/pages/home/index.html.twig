@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<div class="tex">
+	<div class="w-60 text-center">
 		<h1>Bienvenue sur ConvertIt!
 			{% if app.user %}
 				<img src="{{profilePicturePath ?? ''}}{{app.user.profile_pic ?? ''}}" alt="{{app.user.profile_pic ?? ''}}" width='60' height='60' class="">
@@ -11,38 +11,44 @@
 					<strong>Veuillez vous connecter ou vous incrire pour utiliser l'application</strong>
 				</div>
 			{% endif %}
-			<pre>
-                {{ dump(app.user) }}
-            </pre>
 		</h1>
-		<h2>Convertissez et partagez vos images</h2>
-		<p>Ici, vous pourrez convertir vos images en png, jpg ou webp et les partager librement avec la communauté</p>
+		<div class="d-flex justify-content-center text-start">
+			<section class="w-50 mx-4">
+				<div class="tex">
+					<h2>Convertissez et partagez vos images</h2>
+					<p>Ici, vous pourrez convertir vos images en png, jpg ou webp et les partager librement avec la communauté</p>
+				</div>
+				<div>
+					<h1>convertir votre image</h1>
+					<div>{% include "pages/home/_form.html.twig" %}</div>
+				</div>
+			</section>
+			<section class="w-50 bloc how mx-4  text-start">
+				<h3>Comment Convertir</h3>
+				<ul class="">
+					<li>
+						<div class="d-inline-flex">
+							<p class="mx-2">1
+								<div>Connectez vous pour convertir vos images preferées</div>
+							</p>
+						</div>
+					</li>
+					<li>
+						<div class="d-inline-flex">
+							<p class="mx-2">2
+								<div>Remplissez tout les champs necessaires</div>
+							</p>
+						</div>
+					</li>
+					<li>
+						<div class="d-inline-flex">
+							<p class="mx-2">3
+								<div>Cliquez sur Convert et consultez vos images</div>
+							</p>
+						</div>
+					</li>
+				</ul>
+			</section>
+		</div>
 	</div>
-	<div>
-		<h1>convertir votre image</h1>
-		<div>{% include "pages/home/_form.html.twig" %}</div>
-	</div>
-	<section class="bloc how">
-		<h3>Comment Convertir</h3>
-		<ul class="">
-			<li>
-				<div class="">
-					<p class="">1</p>
-					<div>Connectez vous pour convertir vos images preferées</div>
-				</div>
-			</li>
-			<li>
-				<div class="">
-					<p class="">2</p>
-					<div>Remplissez tout les champs necessaires</div>
-				</div>
-			</li>
-			<li>
-				<div class="">
-					<p class="">3</p>
-					<div>Cliquez sur Convert et consultez vos images</div>
-				</div>
-			</li>
-		</ul>
-	</section>
 {% endblock %}

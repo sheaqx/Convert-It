@@ -3,7 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\SuspendAccount;
+use App\Form\SuspendAccountType;
+use App\Form\UserEditBioFormType;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,10 +18,7 @@ class UserController extends AbstractController
     #[Route('', name: 'index')]
     public function index(): Response
     {
-        return $this->render('pages/user/index.html.twig', [
-            'controller_name' => 'UserController',
-            'pictures' => []
-        ]);
+        return $this->render('pages/user/index.html.twig');
     }
 
     #[Route('/suspend', name: 'suspend')]
@@ -29,20 +27,39 @@ class UserController extends AbstractController
         Request $request,
         TokenStorageInterface $tokenStorage,
     ): Response {
+        /** @var User */
         $user = $this->getUser();
-        $form = $this->createForm(SuspendAccount::class, $user);
+        $form = $this->createForm(SuspendAccountType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $userToRemove = new User();
-            $userToRemove = $userRepository->find($user);
-            $userRepository->remove($userToRemove, true);
+            $userRepository->remove($user, true);
             $request->getSession()->invalidate();
             $tokenStorage->setToken(null);
             return $this->redirectToRoute('home_index');
         }
         return $this->render('pages/user/suspend.html.twig', [
             'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/editBio', name: 'edit_bio')]
+    public function editBio(
+        Request $request,
+        UserRepository $userRepository,
+    ): Response {
+        /** @var User */
+        $user = $this->getUser();
+        $form = $this->createForm(UserEditBioFormType::class, $user);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user->setBio($form->get('bio')->getData());
+            $userRepository->save($user, true);
+            return $this->redirectToRoute('user_index');
+        }
+
+        return $this->render('pages/user/editBio.html.twig', [
+            'form' => $form->createView()
         ]);
     }
 }
