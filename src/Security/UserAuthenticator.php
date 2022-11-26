@@ -57,4 +57,8 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
     {
         return $this->urlGenerator->generate(self::LOGIN_ROUTE);
     }
+
+    public function clearSession(): void
+    {
+    }
 }

@@ -1,21 +1,11 @@
-<div class="">
+<div>
+	{{ form_start(form) }}
+	{{form_row(form.name,{'attr':{'value':'{{app.user.bio}}','class':'w-25'}})}}
+	{{form_row(form.upload)}}
+	{{ form_end(form) }}
 	<div class="">
-		<form method="POST" enctype="multipart/form-data">
-			<fieldset class="">
-				<div class="">
-					<div>
-						<label for="profile_pic">Image de profile</label>
-					</div>
-					<div class="">
-						<div>
-							<input type="file" aria-label="Custom controls" name="profile_pic">
-							<input class="" type="text" placeholder="Select file" aria-label="Custom controls" disabled>
-						</div>
-					</div>
-				</div>
-				<button type="submit" class="">Modifier</button>
-			</fieldset>
-		</form>
-		<a href="/user">Back</a>
+		<div class="">
+			<a class="link-secondary" href="{{path('user_index')}}">Back</a>
+		</divlass=>
 	</div>
 </div>

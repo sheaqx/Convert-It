@@ -2,21 +2,21 @@
 
 namespace App\Form;
 
-use App\Entity\Picture;
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
 
-class UploadType extends AbstractType
+class UploadProfilePictureType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('name', FileType::class, [
+                'mapped' => false,
                 'label' => 'Image',
                 'required' => true,
                 'constraints' => [
@@ -33,15 +33,13 @@ class UploadType extends AbstractType
                     ])
                 ],
             ])
-            ->add('tag', TextType::class, ['required' => true,])
-            ->add('description', TextType::class, ['required' => true,])
-            ->add('upload', SubmitType::class, ['label' => 'Convert It !', 'attr' => ['class' => 'btn btn-secondary']]);
+            ->add('upload', SubmitType::class, ['label' => 'Submit', 'attr' => ['class' => 'btn btn-secondary']]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Picture::class,
+            'data_class' => User::class,
         ]);
     }
 }
