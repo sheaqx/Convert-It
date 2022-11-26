@@ -1,8 +1,8 @@
 <div class="user-pictures my-4">
-	<ul class="container-fluid row g-3 m-auto">
+	<ul class="list-unstyled row row-cols-2 row-cols-lg-4 row-cols-md-2 row-cols-sm-2 g-2 g-lg-3">
 		{% for picture in pictures %}
-			<li class="card col-lg-3 col-sm-6">
-				<form method="POST">
+			<li class="col">
+				<form class="card d-flex-column h-100" method="POST">
 					<div class="m-2">
 						<h6 class="card-title">{{picture.tag}}</h6>
 						<div class="img-container">
@@ -11,10 +11,9 @@
 						<span>{{picture.description}}</span>
 					</div>
 					<input type="hidden" value="{{picture.id}}" name="pictureID">
-					<button type="submit" class="btn btn-secondary">Supprimer</button>
+					<button type="submit" class="btn btn-secondary w-50 align-self-center m-2">Supprimer</button>
 				</form>
 			</li>
-
 		{% endfor %}
 	</ul>
 </div>
