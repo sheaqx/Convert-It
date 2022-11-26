@@ -7,23 +7,25 @@
 {% endblock %}
 
 {% block body %}
-	<div class="bio">
-		{% include "pages/user/Components/_showUser.html.twig" %}
-		<div>
+	<div class="bio w-75 container my-5">
+		<div class="card p-4 m-2">
+			{% include "pages/user/Components/_showUser.html.twig" %}
 			<div>
 				<div>
-					<a class="link-secondary" href="user/editBio">Edit Bio</class="link-secondary">
+					<div>
+						<a class="link-secondary" href="user/editBio">Edit Bio</class="link-secondary">
+					</div>
+					<div>
+						<a class="link-secondary" href="user/editProfilePicture">Edit profile picture</a>
+					</div>
 				</div>
 				<div>
-					<a class="link-secondary" href="user/editProfilePicture">Edit profile picture</a>
-				</div>
-			</div>
-			<div>
-				<div>
-					<a class="link-secondary" href="user/suspend">Suspend</a>
+					<div>
+						<a class="link-secondary" href="user/suspend">Suspend</a>
+					</div>
 				</div>
 			</div>
 		</div>
+		{% include "pages/user/Components/_showPictures.html.twig" %}
 	</div>
-	{% include "pages/user/Components/_showPictures.html.twig" %}
 {% endblock %}

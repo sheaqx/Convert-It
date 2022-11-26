@@ -1,27 +1,9 @@
-<pre>
-    {{ dump(app.user) }}
-</pre>
-
 {{form_start(form)}}
-{{form_row(form.bio,{'attr':{'value':'{{app.user.bio}}'}})}}
+{{form_row(form.bio,{'attr':{'value':'{{app.user.bio}}','class':'w-25 custom-text-area'}})}}
 {{form_row(form.Confirm)}}
 {{form_end(form)}}
 <div class="">
-	<div
-		class="">
-		{# <form method="POST">
-																	<fieldset class="">
-																		<div class="">
-																			<div>
-																				<label for="bio">Biographie</label>
-																			</div>
-																			<div class="">
-																				<textarea id="bio" class="" type="textarea" name="bio" cols="50" rows="5" placeholder="">{{app.user.bio}}</textarea>
-																			</div>
-																		</div>
-																		<button type="submit" class="">Modifier</button>
-																	</fieldset>
-																</form> #}
-		<a href="/user">Back</a>
+	<div class="">
+		<a class="link-secondary" href="{{path('user_index')}}">Back</a>
 	</divlass=>
 </div>

@@ -1,13 +1,12 @@
-<div class="user-pictures">
-	<ul class="container">
+<div class="user-pictures my-4">
+	<ul class="container-fluid row g-3 m-auto">
 		{% for picture in pictures %}
-
-			<li class="card">
+			<li class="card col-lg-3 col-sm-6">
 				<form method="POST">
-					<div class="m-4 d-flex">
-						<h6>{{picture.tag}}</h6>
-						<div class="img-container p-4">
-							<img class="img-fluid rounded mx-auto d-block" src="{{ picture.name }}" alt="{{picture.tag}}"/>
+					<div class="m-2">
+						<h6 class="card-title">{{picture.tag}}</h6>
+						<div class="img-container">
+							<img class="img-fluid" src="{{ picture.name }}" alt="{{picture.tag}}"/>
 						</div>
 						<span>{{picture.description}}</span>
 					</div>

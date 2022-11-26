@@ -5,14 +5,18 @@
 $primary: #dfceba;
 $secondary: #af5454;
 $tertiary: #78b1d1;
-$fourth: #8EBEE9;
-$fifth: #407C96;
+$fourth: #8ebee9;
+$fifth: #407c96;
 @import "~bootstrap/scss/bootstrap";
-.img-container{
-    width: 400px;
+.img-container {
+    max-width: 400px;
     height: auto;
 }
-.profile-picture{
+.profile-picture {
     width: 60px;
     height: auto;
+}
+.custom-text-area {
+    resize: none;
+    height: 10rem;
 }
