@@ -4,7 +4,7 @@
 	<div class="w-100 text-center">
 		<h1>Bienvenue sur ConvertIt!
 			{% if app.user %}
-				<img src="{{profilePicturePath ?? ''}}{{app.user.profile_pic ?? ''}}" alt="{{app.user.profile_pic ?? ''}}" width='60' height='60' class="">
+				<img src="{{profilePicturePath ?? ''}}{{app.user.profilePicture ?? ''}}" alt="{{app.user.pseudo ?? ''}}" width='60' height='60' class="">
 				{{app.user.pseudo ?? ''}}
 			{% else %}
 				<div>
@@ -22,7 +22,15 @@
 				</div>
 				<div>
 					<h1>convertir votre image</h1>
-					<div>{% include "pages/home/_form.html.twig" %}</div>
+					{% if app.user %}
+						<div>{% include "pages/home/_form.html.twig" %}</div>
+					{% else %}
+						<div>
+							<h6>
+								<a class='link-secondary' href="{{path('app_login')}}">Veuillez vous connecter ou vous incrire pour utiliser l'application</a>
+							</h6>
+						</div>
+					{% endif %}
 				</div>
 			</section>
 			<section class="w-50 bloc how mx-4  text-start">

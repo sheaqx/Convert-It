@@ -25,8 +25,37 @@ class Upload
         );
         return $newFileName;
     }
+    public function profilePictureUpload(UploadedFile $uploadedFile): string
+    {
+        $originaleFileName = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+        $newFileName = $originaleFileName . '-' . uniqid() . '.' . $uploadedFile->guessExtension();
+        $uploadedFile->move(
+            $this->getUploadDestination(),
+            $newFileName
+        );
+        return $newFileName;
+    }
+
+
+    public function setUploadDestination(string $uploadDestination): self
+    {
+        $this->uploadDestination = $uploadDestination;
+
+        return $this;
+    }
+
     public function getUploadDestination(): string
     {
         return $this->uploadDestination;
+    }
+
+    public function deleteOldProfilePicure(string $oldFile): void
+    {
+        $filelist = glob($this->getUploadDestination() . '*');
+        foreach ($filelist as $file) {
+            if ($file === $oldFile) {
+                unlink($file);
+            }
+        }
     }
 }

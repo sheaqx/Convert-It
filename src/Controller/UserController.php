@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\SuspendAccountType;
+use App\Form\UploadProfilePictureType;
 use App\Form\UserEditBioFormType;
 use App\Repository\UserRepository;
+use App\Service\Upload;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -43,7 +45,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/editBio', name: 'edit_bio')]
+    #[Route('/editBio', name: 'editBio')]
     public function editBio(
         Request $request,
         UserRepository $userRepository,
@@ -59,6 +61,38 @@ class UserController extends AbstractController
         }
 
         return $this->render('pages/user/editBio.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    #[Route('/editProfilePicture', name: 'editProfilePicture')]
+    public function editProfilePictureAction(
+        Request $request,
+        UserRepository $userRepository,
+        Upload $uploadFile,
+    ): Response {
+
+        /** @var User */
+        $user = $this->getUser();
+        $form = $this->createForm(UploadProfilePictureType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $uploadedFile = $form->get('name')->getData();
+            $uploadDestination = 'files/profile/';
+            $oldProfilePicture = $user->getProfilePicture();
+            $uploadFileName = $uploadFile->setUploadDestination($uploadDestination);
+            $uploadFileName = $uploadFile->profilePictureUpload($uploadedFile);
+
+            $user->setProfilePicture($uploadDestination . $uploadFileName);
+            $userRepository->save($user, true);
+
+            $uploadFile->deleteOldProfilePicure($oldProfilePicture);
+            $this->addFlash('success', 'your profile picture has been updated.');
+            return $this->redirectToRoute('user_index');
+        }
+
+        return $this->render('pages/user/editProfilePicture.html.twig', [
             'form' => $form->createView()
         ]);
     }
