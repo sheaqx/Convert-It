@@ -68,8 +68,7 @@ class UserController extends AbstractController
     #[Route('/editProfilePicture', name: 'editProfilePicture')]
     public function editProfilePictureAction(
         Request $request,
-        UserRepository $userRepository,
-        Upload $uploadFile,
+        Upload $upload,
     ): Response {
 
         /** @var User */
@@ -78,16 +77,7 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $uploadedFile = $form->get('name')->getData();
-            $uploadDestination = 'files/profile/';
-            $oldProfilePicture = $user->getProfilePicture();
-            $uploadFileName = $uploadFile->setUploadDestination($uploadDestination);
-            $uploadFileName = $uploadFile->profilePictureUpload($uploadedFile);
-
-            $user->setProfilePicture($uploadDestination . $uploadFileName);
-            $userRepository->save($user, true);
-
-            $uploadFile->deleteOldPicture($oldProfilePicture);
+            $upload->uploadProfilePicture($form, $user);
             $this->addFlash('success', 'your profile picture has been updated.');
             return $this->redirectToRoute('user_index');
         }
