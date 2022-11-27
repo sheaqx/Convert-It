@@ -2,12 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Picture;
 use App\Entity\User;
 use App\Form\SuspendAccountType;
 use App\Form\UploadProfilePictureType;
 use App\Form\UserEditBioFormType;
+use App\Repository\PictureRepository;
 use App\Repository\UserRepository;
 use App\Service\Upload;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,15 +18,26 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 #[Route('/user', name: 'user_')]
+#[IsGranted('ROLE_USER')]
 class UserController extends AbstractController
 {
     #[Route('', name: 'index')]
-    public function index(): Response
+    public function index(PictureRepository $pictureRepository, Upload $upload): Response
     {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id = trim($_POST['pictureID']);
+            $pictureToDelete = $pictureRepository->find($id);
+            $pictureToDeleteName = $pictureToDelete->getName();
+            $pictureRepository->remove($pictureToDelete, true);
+            $upload->deleteOldPicture($pictureToDeleteName, Upload::TEMP_PATH);
+            $this->addFlash('success', 'Picture succeessfully deleted.');
+        }
+
         return $this->render('pages/user/index.html.twig');
     }
 
     #[Route('/suspend', name: 'suspend')]
+    #[IsGranted('ROLE_USER')]
     public function suspend(
         UserRepository $userRepository,
         Request $request,
@@ -46,6 +60,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/editBio', name: 'editBio')]
+    #[IsGranted('ROLE_USER')]
     public function editBio(
         Request $request,
         UserRepository $userRepository,
@@ -66,6 +81,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/editProfilePicture', name: 'editProfilePicture')]
+    #[IsGranted('ROLE_USER')]
     public function editProfilePictureAction(
         Request $request,
         Upload $upload,
