@@ -23,7 +23,6 @@ class GalleryController extends AbstractController
         $pages = range(1, $pagesCount);
         $data = $pictureRepository->findBy([], [], $limit, ($limit * ($page - 1)));
 
-        // dd($data, $pages, $page, $pagesCount);
         return $this->render('pages/gallery/index.html.twig', [
             'pictures' => $data, 'pages' => $pages, 'page' => $page, 'latest' => (int) $pagesCount
 
