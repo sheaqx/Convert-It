@@ -26,6 +26,7 @@ class GalleryController extends AbstractController
         $nextPages = range($page + 1, $page + 2);
         $data = $pictureRepository->findBy([], [], $limit, ($limit * ($page - 1)));
 
+
         return $this->render('pages/gallery/index.html.twig', [
             'pictures' => $data,
             'prevPages' => $prevPages,
