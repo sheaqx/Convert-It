@@ -32,7 +32,8 @@ class GalleryController extends AbstractController
             'nextPages' => $nextPages,
             'pages' => $pages,
             'page' => $page,
-            'latest' => (int) $pagesCount
+            'latest' => (int) $pagesCount,
+            'pathRedirection' => 'gallery_index'
         ]);
     }
 }
