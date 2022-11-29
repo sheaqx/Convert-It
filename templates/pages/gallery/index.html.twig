@@ -37,9 +37,8 @@
 						{% endif %}
 						{% for currentPage in pages %}
 							{# {% set pagesToDisplay = range(currentPage, latest) %} #}
-							{{dump(pagesToDisplay)}}
-							<li class="page-item {{ (currentPage == page) ? 'active' : " " }}">
-								<a class="page-link" href={{path('gallery_index', {page: currentPage} )}}>{{currentPage}}</a>
+							{# {{dump(pagesToDisplay)}} #}
+								<li class="page-item {{ (currentPage == page) ? 'active' : " " }}"> <a class="page-link" href={{path('gallery_index', {page: currentPage} )}}>{{currentPage}}</a>
 							</li>
 						{% endfor %}
 						{% if (page < latest) %}

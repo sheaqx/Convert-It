@@ -17,7 +17,7 @@ class GalleryController extends AbstractController
         PictureRepository $pictureRepository,
         Request $request
     ): Response {
-        $page = (int) $request->query->get('page', "1");
+        $page = (int) $request->query->get('page', '1');
         $limit = 12;
         $pagesCount = ceil(count($pictureRepository->findAll()) / $limit);
         $pages = range(1, $pagesCount);
