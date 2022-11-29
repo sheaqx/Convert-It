@@ -22,7 +22,7 @@
 					<a class="nav-link" href="{{path('contact_index')}}">Contact</a>
 				</li>
 				{% if is_granted('ROLE_USER') %}
-					<img src="{{app.user.profilePicture}}" alt="" width="40">
+					<img src="{{ asset(app.user.profilePicture ?? 'files/profile/default.png' ) }}" alt="" width="40">
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{app.user.pseudo}}</a>
 						<div class="dropdown-menu" aria-labelledby="dropdownId">
