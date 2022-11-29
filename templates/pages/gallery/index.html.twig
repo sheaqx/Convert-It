@@ -5,20 +5,51 @@
 {% endblock %}
 
 {% block body %}
-	<h1>gallery</h1>
-	<section class="">
-		<div class="">
-			{% for image in images %}
-				<div class="">
-					<div class="">
-						<img src="{{picturesPath ?? ""}}{{image.name ?? ""}}" width="1800" height="1200" alt="{{image.tag ?? ""}}">
-					</div>
-					<div class="">
-						<h3 class="">{{image.tag ?? ""}}</h3>
-						<p>{{image.description ?? ""}}</p>
+
+	<section class="container text-center">
+		<h1 class="my-5">Gallery</h1>
+		<div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
+			{% for picture in pictures %}
+				<div class="col">
+					<div class="card" style="width: 18rem">
+						<img src="{{picturesPath ?? ""}}{{picture.name ?? ""}}" style="width: 18rem" alt="{{picture.tag ?? ""}}">
+						<div class="card-body">
+							<h5 class="card-title">{{picture.tag ?? ""}}</h5>
+							<p class="card-text">{{picture.description ?? ""}}</p>
+							{# <a href="#" class="btn btn-primary">Go somewhere</a> #}
+						</div>
 					</div>
 				</div>
 			{% endfor %}
+
+		</div>
+
+
+		{# Navigation entre les pages #}
+		<div class="row">
+			{% if pages > 1 %}
+				<nav aria-label="...">
+					<ul class="pagination justify-content-center my-5">
+						{% if (page > 1) %}
+							<li class="page-item">
+								<a class="page-link" href={{path('gallery_index',{page: (page - 1)} )}}>Previous</a>
+							</li>
+						{% endif %}
+						{% for currentPage in pages %}
+							{# {% set pagesToDisplay = range(currentPage, latest) %} #}
+							{{dump(pagesToDisplay)}}
+							<li class="page-item {{ (currentPage == page) ? 'active' : " " }}">
+								<a class="page-link" href={{path('gallery_index', {page: currentPage} )}}>{{currentPage}}</a>
+							</li>
+						{% endfor %}
+						{% if (page < latest) %}
+							<li class="page-item">
+								<a class="page-link" href={{path('gallery_index', {page : (page + 1)} )}}>Next</a>
+							</li>
+						{% endif %}
+					</ul>
+				</nav>
+			{% endif %}
 		</div>
 	</section>
 {% endblock %}
