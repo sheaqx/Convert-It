@@ -13,9 +13,10 @@
 			{% for picture in pictures %}
 				<div class="col">
 					<div class="card mx-auto" style="width: 18rem; height: 32rem">
-						<img src="{{asset('files/pictures/')}}{{picture.name}}" alt="{{picture.tag ?? ""}}">
+						<img src="{{asset('/files/pictures/')}}{{picture.name}}" alt="{{picture.tag ?? ""}}">
 						<div class="card-body">
 							<h5 class="card-title">{{picture.tag ?? ""}}</h5>
+							<p class="card-text text-truncate">{{picture.description ?? ""}}</p>
 							{# <a href="#" class="btn btn-primary">Go somewhere</a> #}
 						</div>
 					</div>
