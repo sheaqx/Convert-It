@@ -4,16 +4,16 @@ namespace App\Service;
 
 class Convert
 {
-    public function Convert()
+    public function convert()
     {
     }
-    public function ConvertToJpg()
+    public function convertToJpg()
     {
     }
-    public function ConvertToPng()
+    public function convertToPng()
     {
     }
-    public function ConvertToWebp()
+    public function convertToWebp()
     {
     }
 }
