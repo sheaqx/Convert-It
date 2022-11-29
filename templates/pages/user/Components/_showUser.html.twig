@@ -1,6 +1,6 @@
 <div>
 	<div class="d-flex">
-		<img class="profile-picture me-3" src="{{ app.user.profilePicture ?? "" }}" alt="avatar de {{ app.user.pseudo ?? " "}}">
+		<img class="profile-picture me-3" src="{{ asset(app.user.profilePicture ?? 'files/profile/default.png' ) }}" alt="avatar de {{ app.user.pseudo ?? " "}}">
 		<h1 class="card-title">Profil de :
 			{{app.user.pseudo ?? ""}}
 		</h1>
