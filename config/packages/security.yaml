@@ -35,11 +35,6 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/user, roles: ROLE_USER }
-        - { path: ^/suspend, roles: ROLE_USER }
-        - { path: ^/suspend, roles: ROLE_USER }
-        - { path: ^/editBio, roles: ROLE_USER }
-        - { path: ^/editProfilePicture, roles: ROLE_USER }
 
 when@test:
     security:
