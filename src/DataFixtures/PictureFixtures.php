@@ -28,15 +28,16 @@ class PictureFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
-
+        $fileList = glob('public/files/pictures/*');
+        // dd($fileList);
         $faker = Factory::create('fr_FR');
         for ($i = 1; $i <= self::TOTAL_USERS; $i++) {
             for ($j = 0; $j < 5; $j++) {
                 $picture = new Picture();
-                $picture->setName('https://source.unsplash.com/random/300x300')
-                    ->setDescription($faker->paragraph(1, true))
+                $picture->setDescription($faker->paragraph(1, true))
                     ->setTag($faker->randomElement(self::TAGS))
-                    ->setSlug($picture->getName())
+                    ->setSlug($faker->randomElement(str_replace('public/files/pictures/', '', $fileList)))
+                    ->setName($picture->getSlug())
                     ->setUser($this->getReference(UserFixtures::PREFIX . $i));
                 $manager->persist($picture);
             }

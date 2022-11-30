@@ -11,6 +11,7 @@ class UserFixtures extends Fixture
 {
     public const USER_COUNT = 20;
     public const PREFIX = 'user_';
+    public const PASSWORD = 'C0nvertIt!';
 
 
     public function load(ObjectManager $manager): void
@@ -20,25 +21,24 @@ class UserFixtures extends Fixture
         for ($i = 1; $i <= self::USER_COUNT; $i++) {
             $user = new User();
 
-            $user->setEmail($faker->email())
+            $user->setEmail("user_$i@convertit.com")
                 ->setPseudo($faker->firstName())
                 ->setBio($faker->paragraph(2, true))
-                ->setProfilePicture('https://source.unsplash.com/random/80x80')
                 ->setRoles(['ROLE_USER'])
                 ->setActive(true)
-                ->setPlainPassword('C0nvertIt!');
+                ->setPlainPassword(self::PASSWORD);
             $manager->persist($user);
             $this->addReference(self::PREFIX . $i, $user);
         }
         $user = new User();
 
-        $user->setEmail($faker->email())
+        $user->setEmail('admin@convertit.com')
             ->setPseudo('admin')
             ->setBio($faker->paragraph(2, true))
             ->setProfilePicture('https://source.unsplash.com/random/80x80')
             ->setRoles(['ROLE_USER', 'ROLE_ADMIN'])
             ->setActive(true)
-            ->setPlainPassword('C0nvertIt!');
+            ->setPlainPassword(self::PASSWORD);
         $manager->persist($user);
         $this->addReference(self::PREFIX .  (self::USER_COUNT + 1), $user);
 

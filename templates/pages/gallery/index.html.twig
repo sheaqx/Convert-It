@@ -7,15 +7,16 @@
 {% block body %}
 
 	<section class="container text-center">
-		<h1 class="my-5">Gallery</h1>
-		<div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
+		<h1 class="my-5 ">Gallery</h1>
+		{% include "components/_pagination.html.twig" %}
+		<div class="row row-cols row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-2 g-lg-3 mb-5">
 			{% for picture in pictures %}
 				<div class="col">
-					<div class="card" style="width: 18rem">
-						<img src="{{picturesPath ?? ""}}{{picture.name ?? ""}}" style="width: 18rem" alt="{{picture.tag ?? ""}}">
+					<div class="card mx-auto" style="width: 18rem; height: 32rem">
+						<img src="{{asset('files/pictures/')}}{{picture.name}}" alt="{{picture.tag ?? ""}}">
 						<div class="card-body">
 							<h5 class="card-title">{{picture.tag ?? ""}}</h5>
-							<p class="card-text">{{picture.description ?? ""}}</p>
+							<p class="card-text text-truncate">{{picture.description ?? ""}}</p>
 							{# <a href="#" class="btn btn-primary">Go somewhere</a> #}
 						</div>
 					</div>
@@ -25,31 +26,5 @@
 		</div>
 
 
-		{# Navigation entre les pages #}
-		<div class="row">
-			{% if pages > 1 %}
-				<nav aria-label="...">
-					<ul class="pagination justify-content-center my-5">
-						{% if (page > 1) %}
-							<li class="page-item">
-								<a class="page-link" href={{path('gallery_index',{page: (page - 1)} )}}>Previous</a>
-							</li>
-						{% endif %}
-						{% for currentPage in pages %}
-							{# {% set pagesToDisplay = range(currentPage, latest) %} #}
-							{{dump(pagesToDisplay)}}
-							<li class="page-item {{ (currentPage == page) ? 'active' : " " }}">
-								<a class="page-link" href={{path('gallery_index', {page: currentPage} )}}>{{currentPage}}</a>
-							</li>
-						{% endfor %}
-						{% if (page < latest) %}
-							<li class="page-item">
-								<a class="page-link" href={{path('gallery_index', {page : (page + 1)} )}}>Next</a>
-							</li>
-						{% endif %}
-					</ul>
-				</nav>
-			{% endif %}
-		</div>
 	</section>
 {% endblock %}
