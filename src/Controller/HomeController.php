@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Form\UploadType;
 use App\Repository\PictureRepository;
 use App\Repository\UserRepository;
+use App\Service\Convert;
 use App\Service\Upload;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +21,8 @@ class HomeController extends AbstractController
         PictureRepository $pictureRepository,
         Request $request,
         Upload $imageUpload,
-        UserRepository $userRepository
+        UserRepository $userRepository,
+        Convert $convert,
     ): Response {
 
         $currentUser = $this->getUser();
@@ -31,7 +33,20 @@ class HomeController extends AbstractController
             $uploadedFile = $uploadForm->get('name')->getData();
             $uploadFileName = $imageUpload->imageUpload($uploadedFile);
             $user = $userRepository->find($currentUser);
-            $picture->setName(Upload::TEMP_PATH . $uploadFileName)
+            $convert->convert($uploadFileName);
+            // dd($uploadFileName);
+            $fileExtension = $uploadedFile->getClientOriginalExtension();
+
+            if ($fileExtension === 'png') {
+                $convert->convertPngToWebp($uploadFileName);
+            }
+            if ($fileExtension === 'jpg') {
+                $convert->convertJpgToWebp($uploadFileName);
+            }
+            if ($fileExtension === 'webp') {
+                $convert->convertWebpToPng($uploadFileName);
+            }
+            $picture->setName(Upload::CONVERT_PATH . $uploadFileName)
                 ->setTag($picture->getTag())
                 ->setDescription($picture->getDescription())
                 ->setSlug($picture->getName())
