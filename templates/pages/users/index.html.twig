@@ -5,22 +5,22 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Users</h1>
-	<div class="">
+	<div class="container">
+		<h1 class="title">La Communauté</h1>
+		{% include "components/_pagination.html.twig" %}
 		{% for user in users %}
 			{% if user.pictures %}
 				<div>
-					<h3>Images de
-						{{user.pseudo ?? ""}}
-					</h3>
-					<div>
-						<a class="link-secondary" href="{{path('users_show', {id: user.id} )}}">{{ user.pseudo ?? ""}}</a>
-					</div>
-					<ul class="">
+					<h2 class="my-4">Images de
+						<a class="link-secondary" href="{{path('users_show', {id: user.id} )}}">
+							{{ user.pseudo ?? ""}}
+						</a>
+					</h2>
+					<ul class="list-unstyled row row-cols row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-2 g-lg-3 mb-5">
 						{% for picture in user.pictures %}
-							<li>
+							<li class="card mx-auto" style="width:18rem;min-height:18rem">
 								<figure class="img-container">
-									<img src="{{picturesPath ?? ""}}{{picture.name ?? ""}}" alt=""/>
+									<img class='w-100' src="{{asset('files/pictures/') }}{{picture.name ?? ""}}" alt=""/>
 									<figcaption>{{picture.tag ?? ""}}</figcaption>
 								</figure>
 								<p>{{picture.description ?? ""}}</p>
