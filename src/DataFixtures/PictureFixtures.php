@@ -33,7 +33,7 @@ class PictureFixtures extends Fixture implements DependentFixtureInterface
         for ($i = 1; $i <= self::TOTAL_USERS; $i++) {
             for ($j = 0; $j < 5; $j++) {
                 $picture = new Picture();
-                $picture->setName('https://source.unsplash.com/random/300x300')
+                $picture->setName('https://images.unsplash.com/photo-1668763118304-3f8525fcc92d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80')
                     ->setDescription($faker->paragraph(1, true))
                     ->setTag($faker->randomElement(self::TAGS))
                     ->setSlug($picture->getName())
