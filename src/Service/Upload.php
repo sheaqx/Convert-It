@@ -69,6 +69,8 @@ class Upload
         foreach ($filelist as $file) {
             if ($file === $oldFile) {
                 unlink($file);
+            } else {
+                return;
             }
         }
     }
