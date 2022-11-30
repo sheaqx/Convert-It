@@ -37,7 +37,6 @@ class UserController extends AbstractController
     }
 
     #[Route('/suspend', name: 'suspend')]
-    #[IsGranted('ROLE_USER')]
     public function suspend(
         UserRepository $userRepository,
         Request $request,
@@ -60,7 +59,6 @@ class UserController extends AbstractController
     }
 
     #[Route('/editBio', name: 'editBio')]
-    #[IsGranted('ROLE_USER')]
     public function editBio(
         Request $request,
         UserRepository $userRepository,
@@ -81,7 +79,6 @@ class UserController extends AbstractController
     }
 
     #[Route('/editProfilePicture', name: 'editProfilePicture')]
-    #[IsGranted('ROLE_USER')]
     public function editProfilePictureAction(
         Request $request,
         Upload $upload,
