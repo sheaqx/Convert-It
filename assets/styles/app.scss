@@ -8,6 +8,9 @@ $tertiary: #78b1d1;
 $fourth: #8ebee9;
 $fifth: #407c96;
 @import "~bootstrap/scss/bootstrap";
+body {
+    min-height: 100vh;
+}
 .img-container {
     max-width: 25rem;
     height: auto;
