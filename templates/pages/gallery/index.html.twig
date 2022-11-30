@@ -11,11 +11,11 @@
 		{% include "components/_pagination.html.twig" %}
 		<div class="row row-cols row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-2 g-lg-3 mb-5">
 			{% for picture in pictures %}
-				<div class="col">
-					<div class="card mx-auto h-100" style="width: 18rem; min-height: 18rem">
+				<div class="col ">
+					<div class="card  mx-auto h-100" style="width: 18rem; min-height: 18rem">
+						<h5 class="card-title tag mx-2">{{picture.tag ?? ""}}</h5>
 						<img src="{{asset('files/pictures/')}}{{picture.name}}" alt="{{picture.tag ?? ""}}">
 						<div class="card-body">
-							<h5 class="card-title">{{picture.tag ?? ""}}</h5>
 							<p class="card-text">{{picture.description ?? ""}}</p>
 							{# <a href="#" class="btn btn-primary">Go somewhere</a> #}
 						</div>

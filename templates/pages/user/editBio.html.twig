@@ -3,6 +3,8 @@
 
 {% block title %}{% endblock %}
 {% block body %}
-	{% include "pages/user/Components/_showUser.html.twig" %}
-	{% include "pages/user/Components/_editBio.html.twig" %}
+	<div class="container my-5">
+		{% include "pages/user/Components/_showUser.html.twig" %}
+		{% include "pages/user/Components/_editBio.html.twig" %}
+	</div>
 {% endblock %}

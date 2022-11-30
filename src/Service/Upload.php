@@ -63,14 +63,12 @@ class Upload
         $this->deleteOldPicture($oldProfilePicture, self::PROFILE_PATH);
     }
 
-    public function deleteOldPicture(string $oldFile, string $filesFolder): void
+    public function deleteOldPicture(?string $oldFile, string $filesFolder): void
     {
         $filelist = glob($filesFolder . '*');
         foreach ($filelist as $file) {
             if ($file === $oldFile) {
                 unlink($file);
-            } else {
-                return;
             }
         }
     }
