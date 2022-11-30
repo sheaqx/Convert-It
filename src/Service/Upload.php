@@ -7,6 +7,7 @@ use App\Repository\UserRepository;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use App\Service\Convert;
 
 class Upload
 {
@@ -31,14 +32,25 @@ class Upload
         $newFileName = $safeFileName . '-' . uniqid() . '.' . $uploadedFile->guessExtension();
         $extension = explode('.', $originaleFileName);
         $extension = strtolower(end($extension));
+        $fileExtension = $uploadedFile->guessExtension();
         //send image to temp folder
         $uploadedFile->move(
             self::TEMP_PATH,
             $newFileName
         );
-        //convert to png
-        $convert = imagecreatefrompng(self::TEMP_PATH . $newFileName);
-        imagewebp($convert, str_replace('png', 'webp', self::CONVERT_PATH . $newFileName));
+        if ($fileExtension === 'png') {
+            //convert png to webp
+            $convertPngToWebp = imagecreatefrompng(self::TEMP_PATH . $newFileName);
+            imagewebp($convertPngToWebp, str_replace('png', 'webp', self::CONVERT_PATH . $newFileName));
+        }
+        if ($fileExtension === 'jpg') {
+            $convertJpgToWebp = imagecreatefromjpeg(self::TEMP_PATH . $newFileName);
+            imagewebp($convertJpgToWebp, str_replace('jpg', 'webp', self::CONVERT_PATH . $newFileName));
+        }
+        if ($fileExtension === 'webp') {
+            $convertWebpToPng = imagecreatefromwebp(self::TEMP_PATH . $newFileName);
+            imagepng($convertWebpToPng, str_replace('webp', 'png', self::CONVERT_PATH . $newFileName));
+        }
         return $newFileName;
     }
 
