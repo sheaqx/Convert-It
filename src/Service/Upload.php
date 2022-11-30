@@ -29,11 +29,17 @@ class Upload
         $originaleFileName = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
         $safeFileName = $this->slugger->slug($originaleFileName);
         $newFileName = $safeFileName . '-' . uniqid() . '.' . $uploadedFile->guessExtension();
+        //explode file name and extension 
+        $extension = explode('.', $originaleFileName);
+        $extension = strtolower(end($extension));
         //send image to temp folder
         $uploadedFile->move(
             self::TEMP_PATH,
             $newFileName
         );
+        //convert to png
+        $convert = imagecreatefrompng(self::TEMP_PATH . $newFileName);
+        imagewebp($convert, str_replace('png', 'webp', self::CONVERT_PATH . $newFileName));
         return $newFileName;
     }
 
