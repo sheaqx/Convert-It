@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Picture;
 use App\Repository\PictureRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,7 +12,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class GalleryController extends AbstractController
 {
     #[Route('/gallery', name: 'gallery_index', methods: ['GET'])]
-
     //Pagination
     public function index(
         PictureRepository $pictureRepository,
@@ -36,5 +36,15 @@ class GalleryController extends AbstractController
             'latest' => (int) $pagesCount,
             'pathRedirection' => 'gallery_index'
         ]);
+    }
+
+    #[Route('/show/{picture}', name: 'picture_show', methods: ['GET'])]
+    public function show(Picture $picture, PictureRepository $pictureRepository): Response
+    {
+        $picture = $pictureRepository->find($picture);
+        $extension = $picture->getName();
+        $extension = explode('.', $extension);
+        $extension = $extension[1];
+        return $this->render('pages/gallery/show.html.twig', ['picture' => $picture, 'extension' => $extension]);
     }
 }
