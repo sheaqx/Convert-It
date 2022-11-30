@@ -29,7 +29,6 @@ class Upload
         $originaleFileName = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
         $safeFileName = $this->slugger->slug($originaleFileName);
         $newFileName = $safeFileName . '-' . uniqid() . '.' . $uploadedFile->guessExtension();
-        //explode file name and extension 
         $extension = explode('.', $originaleFileName);
         $extension = strtolower(end($extension));
         //send image to temp folder
