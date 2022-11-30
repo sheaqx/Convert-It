@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,7 +14,16 @@ class UsersController extends AbstractController
     public function index(UserRepository $users): Response
     {
         return $this->render('pages/users/index.html.twig', [
-            'controller_name' => 'UsersController', 'users' => $users->findByActive(true)
+            'users' => $users->findAll(),
+        ]);
+    }
+
+    #[Route('/users/show/{id}', name: 'users_show')]
+    public function show(int $id, UserRepository $users): Response
+    {
+        $user = $users->findOneBy(['id' => $id]);
+        return $this->render('pages/users/show.html.twig', [
+            'user' => $user
         ]);
     }
 }
