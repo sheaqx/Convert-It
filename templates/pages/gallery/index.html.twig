@@ -26,5 +26,30 @@
 		</div>
 
 
+		{# Navigation entre les pages #}
+		<div class="row">
+			{% if pages > 1 %}
+				<nav aria-label="...">
+					<ul class="pagination justify-content-center my-5">
+						{% if (page > 1) %}
+							<li class="page-item">
+								<a class="page-link" href={{path('gallery_index',{page: (page - 1)} )}}>Previous</a>
+							</li>
+						{% endif %}
+						{% for currentPage in pages %}
+							{# {% set pagesToDisplay = range(currentPage, latest) %} #}
+							{# {{dump(pagesToDisplay)}} #}
+								<li class="page-item {{ (currentPage == page) ? 'active' : " " }}"> <a class="page-link" href={{path('gallery_index', {page: currentPage} )}}>{{currentPage}}</a>
+							</li>
+						{% endfor %}
+						{% if (page < latest) %}
+							<li class="page-item">
+								<a class="page-link" href={{path('gallery_index', {page : (page + 1)} )}}>Next</a>
+							</li>
+						{% endif %}
+					</ul>
+				</nav>
+			{% endif %}
+		</div>
 	</section>
 {% endblock %}
