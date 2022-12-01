@@ -3,7 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Picture;
+use App\Service\Upload;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -32,6 +34,15 @@ class UploadType extends AbstractType
                         'mimeTypesMessage' => 'Please upload a valid image',
                     ])
                 ],
+            ])
+            ->add('convertTo', ChoiceType::class, [
+                'mapped' => false,
+                'choices' => [
+                    'choose' => 1,
+                    'webp' => 2,
+                    'png' => 3,
+                    'jpg' => 4,
+                ]
             ])
             ->add('tag', TextType::class, ['required' => true,])
             ->add('description', TextType::class, ['required' => true,])
