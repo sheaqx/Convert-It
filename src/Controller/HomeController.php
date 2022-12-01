@@ -14,6 +14,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+ */
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'home_index')]
@@ -26,27 +29,54 @@ class HomeController extends AbstractController
     ): Response {
 
         $currentUser = $this->getUser();
+        $user = $userRepository->find($currentUser);
         $picture = new Picture();
         $uploadForm = $this->createForm(UploadType::class, $picture);
         $uploadForm->handleRequest($request);
+
         if ($uploadForm->isSubmitted() && $uploadForm->isValid()) {
+            //get picture infos and mv to temp folder
             $uploadedFile = $uploadForm->get('name')->getData();
             $uploadFileName = $imageUpload->imageUpload($uploadedFile);
-            $user = $userRepository->find($currentUser);
-            $convert->convert($uploadFileName);
-            // dd($uploadFileName);
+
+            //get form extension info and file extension info
+            $dropdown = $uploadForm->get('convertTo')->getData();
             $fileExtension = $uploadedFile->getClientOriginalExtension();
 
-            if ($fileExtension === 'png') {
-                $convert->convertPngToWebp($uploadFileName);
+            if ($dropdown === 1) {
+                $this->addFlash('success', 'please chose a format to convert your picture into');
+                return $this->redirectToRoute('home_index');
             }
-            if ($fileExtension === 'jpg') {
-                $convert->convertJpgToWebp($uploadFileName);
+
+            //prepare converted file name
+            $convertedFile = '';
+
+
+            // png treatment
+            if (str_starts_with($fileExtension, 'png') && $dropdown !== 3) {
+                $convertedFile = $convert->convertPngFromDropdown($dropdown, $uploadFileName);
+            } else {
+                $this->addFlash('success', 'input and outpout formats are indentical');
+                return $this->redirectToRoute('home_index');
             }
-            if ($fileExtension === 'webp') {
-                $convert->convertWebpToPng($uploadFileName);
+
+            //jpg/jpeg treatment
+            if ((str_starts_with($fileExtension, 'jp')) && $dropdown !== 4) {
+                $convertedFile = $convert->convertJpgFromDropdown($dropdown, $uploadFileName);
+            } else {
+                $this->addFlash('success', 'input and outpout formats are indentical');
+                return $this->redirectToRoute('home_index');
             }
-            $picture->setName(Upload::CONVERT_PATH . $uploadFileName)
+
+            //webp treatment
+            if (str_starts_with($fileExtension, 'webp') && ($dropdown !== 2)) {
+                $convertedFile = $convert->convertWebpFromDropdown($dropdown, $uploadFileName);
+            } else {
+                $this->addFlash('success', 'input and outpout formats are indentical');
+                return $this->redirectToRoute('home_index');
+            }
+
+            $picture->setName($convertedFile)
                 ->setTag($picture->getTag())
                 ->setDescription($picture->getDescription())
                 ->setSlug($picture->getName())
