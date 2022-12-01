@@ -53,27 +53,33 @@ class HomeController extends AbstractController
 
 
             // png treatment
-            if (str_starts_with($fileExtension, 'png') && $dropdown !== 3) {
-                $convertedFile = $convert->convertPngFromDropdown($dropdown, $uploadFileName);
-            } else {
-                $this->addFlash('success', 'input and outpout formats are indentical');
-                return $this->redirectToRoute('home_index');
+            if ($fileExtension === 'png') {
+                if ($dropdown !== 3) {
+                    $convertedFile = $convert->convertPngFromDropdown($dropdown, $uploadFileName);
+                } else {
+                    $this->addFlash('success', 'input and outpout formats are indentical');
+                    return $this->redirectToRoute('home_index');
+                }
             }
 
             //jpg/jpeg treatment
-            if ((str_starts_with($fileExtension, 'jp')) && $dropdown !== 4) {
-                $convertedFile = $convert->convertJpgFromDropdown($dropdown, $uploadFileName);
-            } else {
-                $this->addFlash('success', 'input and outpout formats are indentical');
-                return $this->redirectToRoute('home_index');
+            if (($fileExtension === 'jpg' || $fileExtension === 'jpeg')) {
+                if ($dropdown !== 4) {
+                    $convertedFile = $convert->convertJpgFromDropdown($dropdown, $uploadFileName);
+                } else {
+                    $this->addFlash('success', 'input and outpout formats are indentical');
+                    return $this->redirectToRoute('home_index');
+                }
             }
 
             //webp treatment
-            if (str_starts_with($fileExtension, 'webp') && ($dropdown !== 2)) {
-                $convertedFile = $convert->convertWebpFromDropdown($dropdown, $uploadFileName);
-            } else {
-                $this->addFlash('success', 'input and outpout formats are indentical');
-                return $this->redirectToRoute('home_index');
+            if (($fileExtension === 'webp')) {
+                if ($dropdown !== 2) {
+                    $convertedFile = $convert->convertWebpFromDropdown($dropdown, $uploadFileName);
+                } else {
+                    $this->addFlash('success', 'input and outpout formats are indentical');
+                    return $this->redirectToRoute('home_index');
+                }
             }
 
             $picture->setName($convertedFile)
