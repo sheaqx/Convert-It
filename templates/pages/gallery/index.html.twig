@@ -5,27 +5,23 @@
 {% endblock %}
 
 {% block body %}
-
 	<section class="container text-center">
 		<h1 class="my-5 ">Gallery</h1>
 		{% include "components/_pagination.html.twig" %}
 		<div class="row row-cols row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-2 g-lg-3 mb-5">
 			{% for picture in pictures %}
-				<div class="col">
-					<div class="card mx-auto h-100" style="width: 18rem; min-height: 18rem">
+				<div class="col ">
+					<div class="card mx-auto h-100 d-flex flex-column justify-content-between" style="width: 18rem; min-height: 18rem">
+						<h5 class="align-middle card-title tag mx-2">{{picture.tag ?? ""}}</h5>
 						<img src="{{asset('files/pictures/')}}{{picture.name}}" alt="{{picture.tag ?? ""}}">
-						<div class="card-body">
-							<h5 class="card-title">{{picture.tag ?? ""}}</h5>
+						<div class="card-body d-flex flex-column justify-content-between">
 							<p class="card-text">{{picture.description ?? ""}}</p>
-							{# <a href="#" class="btn btn-primary">Go somewhere</a> #}
+							<a href="{{path('picture_show', {picture:picture.id})}}" class="btn btn-primary">See picture</a>
 						</div>
 					</div>
 				</div>
 			{% endfor %}
-
 		</div>
-
-
 		<p class="card-text text-truncate">{{picture.description ?? ""}}</p>
 	</section>
 {% endblock %}

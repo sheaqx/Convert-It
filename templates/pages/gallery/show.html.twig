@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+	{{parent()}}
+	- Picture
+{% endblock %}
+{% block body %}
+	<div class="container">
+		<div class="card d-flex flex-column justify-content-center m-4 p-4">
+			<div>
+				<h4>Converted in
+					{{extension}}
+					by :
+					{{picture.user.pseudo}}</h4>
+				<h5 class="tag">{{picture.tag}}</h5>
+				<p>Description :
+					{{picture.description}}</p>
+			</div>
+			<img class="img-fluid mx-auto" src="{{asset('files/pictures/')}}{{picture.name}}" alt="">
+			<div class="my-4">
+				<a class="link-secondary " href="{{path('gallery_index')}}">Back</a>
+			</div>
+		</div>
+
+	</div>
+{% endblock %}

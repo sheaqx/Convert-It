@@ -6,7 +6,7 @@
 
 {% block body %}
 	<div class="container">
-		<h1 class="title">La Communauté</h1>
+		<h1 class="text-center m-5">Users</h1>
 		{% include "components/_pagination.html.twig" %}
 		{% for user in users %}
 			{% if user.pictures %}
@@ -19,9 +19,9 @@
 					<ul class="list-unstyled row row-cols row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-2 g-lg-3 mb-5">
 						{% for picture in user.pictures %}
 							<li class="card mx-auto" style="width:18rem;min-height:18rem">
+								<h5 class="card-title tag">{{picture.tag ?? ""}}</h5>
 								<figure class="img-container">
 									<img class='w-100' src="{{asset('files/pictures/') }}{{picture.name ?? ""}}" alt=""/>
-									<figcaption>{{picture.tag ?? ""}}</figcaption>
 								</figure>
 								<p>{{picture.description ?? ""}}</p>
 							</li>

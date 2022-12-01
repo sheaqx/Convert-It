@@ -70,6 +70,7 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setBio($form->get('bio')->getData());
             $userRepository->save($user, true);
+            $this->addFlash('success', 'your bio has been updated.');
             return $this->redirectToRoute('user_index');
         }
 

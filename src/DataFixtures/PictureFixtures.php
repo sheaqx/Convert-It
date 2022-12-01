@@ -29,7 +29,6 @@ class PictureFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         $fileList = glob('public/files/pictures/*');
-        // dd($fileList);
         $faker = Factory::create('fr_FR');
         for ($i = 1; $i <= self::TOTAL_USERS; $i++) {
             for ($j = 0; $j < 5; $j++) {
