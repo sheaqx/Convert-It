@@ -5,7 +5,6 @@
 {% endblock %}
 
 {% block body %}
-
 	<section class="container text-center">
 		<h1 class="my-5 ">Gallery</h1>
 		{% include "components/_pagination.html.twig" %}
@@ -22,10 +21,7 @@
 					</div>
 				</div>
 			{% endfor %}
-
 		</div>
-
-
 		<p class="card-text text-truncate">{{picture.description ?? ""}}</p>
 	</section>
 {% endblock %}
