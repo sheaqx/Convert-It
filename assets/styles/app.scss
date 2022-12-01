@@ -8,15 +8,30 @@ $tertiary: #78b1d1;
 $fourth: #8ebee9;
 $fifth: #407c96;
 @import "~bootstrap/scss/bootstrap";
+body {
+    min-height: 100vh;
+}
 .img-container {
-    max-width: 400px;
+    max-width: 25rem;
     height: auto;
+    object-fit: contain;
 }
 .profile-picture {
-    width: 60px;
+    max-width: 3.75rem;
     height: auto;
+    object-fit: contain;
 }
 .custom-text-area {
     resize: none;
     height: 10rem;
+}
+.tag {
+    border-radius: 1rem;
+    background-color:#407c96;
+    color: #dfceba;
+    text-align: center;
+    margin-top: 0.5rem;
+}
+.alert {
+    text-align: center;
 }

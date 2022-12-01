@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+	{{parent()}}
+	- images de
+	{{user.pseudo}}
+{% endblock %}
+
+{% block body %}
+	{# //Gallerie des images d'un utilisateur #}
+	<div class="container mb-5">
+		<section>
+			<h1 class="mt-5">{{user.pseudo}}</h1>
+			<img src="{{ asset( user.profilePicture ?? 'files/profile/default.png' ) }}" style="width: 5rem" alt="{{picture.tag ?? ""}}">
+			<h4>Bio :</h4>
+			<p>{{user.bio}}</p>
+			<a class="link-secondary" href="{{path('users_index')}}">Back</a>
+		</section>
+		<section>
+			<h4 class="my-5">Sa Galerie</h4>
+			<div class="row row-cols row-cols-md-2 row-cols-lg-4 g-1 g-lg-3">
+				{% if user.pictures %}
+					{% for picture in user.pictures %}
+						<div class="col">
+							<div class="card h-100" style="width: 18rem">
+								<h5 class="card-title tag mx-2">{{picture.tag ?? ""}}</h5>
+								<div class="img-container">
+									<img class=" w-100" src="{{asset('files/pictures/')}}{{picture.name}}" style="width: 18rem" alt="{{picture.tag ?? ""}}" class="rounded mx-auto d-block">
+								</div>
+								<div class="card-body">
+									<p class="card-text">{{picture.description ?? ""}}</p>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				{% endif %}
+			</div>
+		</section>
+	</div>
+{% endblock %}

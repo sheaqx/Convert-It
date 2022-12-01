@@ -1,12 +1,13 @@
+
 <div class="user-pictures my-4">
 	<ul class="list-unstyled row row-cols-2 row-cols-lg-4 row-cols-md-2 g-2 g-lg-3">
-		{% for picture in app.user.pictures %}
+		{% for picture in pictures %}
 			<li class="col">
 				<form class="card d-flex-column h-100" method="POST">
-					<div class="m-2">
-						<h6 class="card-title">{{picture.tag}}</h6>
+					<div class="mx-2">
+						<h5 class="card-title tag">{{picture.tag}}</h5>
 						<div class="img-container">
-							<img class="img-fluid" src="{{asset('files/pictures/')}}{{ picture.name }}" alt="{{picture.tag}}"/>
+							<img class="img-fluid" src="{{ picture.name }}" alt="{{picture.tag}}"/>
 						</div>
 						<span>{{picture.description}}</span>
 					</div>
