@@ -28,13 +28,13 @@ class HomeController extends AbstractController
         Convert $convert,
     ): Response {
 
-        $currentUser = $this->getUser();
-        $user = $userRepository->find($currentUser);
         $picture = new Picture();
         $uploadForm = $this->createForm(UploadType::class, $picture);
         $uploadForm->handleRequest($request);
 
         if ($uploadForm->isSubmitted() && $uploadForm->isValid()) {
+            $currentUser = $this->getUser();
+            $user = $userRepository->find($currentUser);
             //get picture infos and mv to temp folder
             $uploadedFile = $uploadForm->get('name')->getData();
             $uploadFileName = $imageUpload->imageUpload($uploadedFile);
